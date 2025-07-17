@@ -1,2 +1,3 @@
 This is the first commit.
 PR_NUMBER=1
+This is the second commit.
