@@ -10,8 +10,12 @@ permissions:
 
 jobs:
   add_data:
-    if: ${{github.event.label.name== 'bootstrap'}}
+    if: ${{github.event.label.name == 'bootstrap'}}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
     steps:
       - name: Checkout current branch
         uses: actions/checkout@v3
@@ -20,7 +24,7 @@ jobs:
       - name: Save PR number
         env:
           PR_NUMBER: ${{ github.event.number }}
-        run: bash 'echo "PR_NUMBER=${PR_NUMBER}" >> test.txt'
+        run: echo "PR_NUMBER=${PR_NUMBER}" >> test.txt
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
