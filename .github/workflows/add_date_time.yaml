@@ -11,7 +11,7 @@ permissions:
 jobs:
   add_data:
     if: ${{github.event.label.name == 'bootstrap'}}
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     defaults:
       run:
         shell: bash
@@ -27,8 +27,8 @@ jobs:
         run: echo "PR_NUMBER=${PR_NUMBER}" >> test.txt
       - name: Commit changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add test.txt
           git commit -m "Add PR number to test.txt"
           git push origin HEAD:${{ github.head_ref }}
